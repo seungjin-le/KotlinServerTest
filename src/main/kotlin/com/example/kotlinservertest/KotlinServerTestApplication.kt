@@ -7,5 +7,6 @@ import org.springframework.boot.runApplication
 class KotlinServerTestApplication
 
 fun main(args: Array<String>) {
+    println("testtest")
     runApplication<KotlinServerTestApplication>(*args)
 }
