@@ -1,3 +1,2 @@
 ### 스웨거
-- http://localhost:8080/swagger-ui/index.html
- 
+- http://localhost:8000/api-docs

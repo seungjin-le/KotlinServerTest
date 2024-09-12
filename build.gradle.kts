@@ -27,12 +27,14 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+
     implementation("io.springfox:springfox-boot-starter:3.0.0")
 
     // swgger config
-    implementation("org.springdoc:springdoc-openapi-ui:1.8.0")
-    implementation("org.springdoc:springdoc-openapi-kotlin:1.8.0")
+
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+
 
 
 }
