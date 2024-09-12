@@ -22,6 +22,9 @@ class SwaggerConfig {
             .info(configurationInfo())
     }
 
+
+
+
     private fun configurationInfo(): Info {
         return Info()
             .title("Kotlin Server Test")
