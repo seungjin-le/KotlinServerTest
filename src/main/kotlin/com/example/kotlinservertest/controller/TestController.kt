@@ -2,18 +2,32 @@ package com.example.kotlinservertest.controller
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
-@Tag(name = "TestController")
+@Tag(name = "UserController")
 @RestController
-//@RequestMapping("/api/v1/test")
+@RequestMapping("/api/v1/user")
 class TestController {
 
-    @Operation(summary = "Get Test API", description = "This is GET API")
-    @RequestMapping("/hello")
-    fun helloWorld(): String {
+    @Operation(summary = "정보 조회", description = "정보 조회")
+    @GetMapping
+    fun getInfo(): String {
+        return "내정보"
+    }
+    @Operation(summary = "로그인", description = "로그인")
+    @PostMapping("/login")
+    fun postLogin(): String {
+        return "Hello, World!"
+    }
+    @Operation(summary = "정보 수정", description = "정보 수정")
+    @PutMapping
+    fun putInfo(): String {
+        return "Hello, World!"
+    }
+    @Operation(summary = "정보 삭제", description = "정보 삭제")
+    @DeleteMapping
+    fun deleteInfo(): String {
         return "Hello, World!"
     }
 }
