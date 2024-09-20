@@ -25,7 +25,6 @@ class TestController {
     @Operation(summary = "정보 수정", description = "정보 수정")
     @PutMapping
     fun putInfo(): String {
-
         return "Hello, World!"
     }
     @Operation(summary = "정보 삭제", description = "정보 삭제")
