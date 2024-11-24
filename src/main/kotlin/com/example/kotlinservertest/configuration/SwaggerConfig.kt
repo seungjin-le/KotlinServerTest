@@ -30,7 +30,7 @@ class SwaggerConfig {
 
     private fun swaggerInfo() = ApiInfoBuilder()
         .title("스웨거 테스트")
-        .description("스웨거로 API를 테스트")
+        .description("스웨거 API 테스트")
         .version("1.0.0")
         .build()
 
