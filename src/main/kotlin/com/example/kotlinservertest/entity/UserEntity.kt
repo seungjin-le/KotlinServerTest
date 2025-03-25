@@ -1,16 +1,12 @@
 package com.example.kotlinservertest.entity
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import nonapi.io.github.classgraph.json.Id
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-
-
-@Entity
+@Document(collection = "users")
 data class User(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    @Id
+    val id: String? = null, // MongoDB ID는 String 타입, 기본값 null
     val name: String,
     val email: String
 )

@@ -14,7 +14,7 @@ class UserController(private val userService: UserService) {
     fun getAllUsers(): List<User> = userService.getAllUsers()
 
     @GetMapping("/{id}")
-    fun getUserById(@PathVariable id: Long): ResponseEntity<User> {
+    fun getUserById(@PathVariable id: String): ResponseEntity<User> {
         val user = userService.getUserById(id)
         return if (user != null) {
             ResponseEntity.ok(user)
@@ -30,7 +30,7 @@ class UserController(private val userService: UserService) {
     }
 
     @PutMapping("/{id}")
-    fun updateUser(@PathVariable id: Long, @RequestBody user: User): ResponseEntity<User> {
+    fun updateUser(@PathVariable id: String, @RequestBody user: User): ResponseEntity<User> {
         val updatedUser = userService.updateUser(id, user)
         return if (updatedUser != null) {
             ResponseEntity.ok(updatedUser)
@@ -40,7 +40,7 @@ class UserController(private val userService: UserService) {
     }
 
     @DeleteMapping("/{id}")
-    fun deleteUser(@PathVariable id: Long): ResponseEntity<Void> {
+    fun deleteUser(@PathVariable id: String): ResponseEntity<Void> {
         userService.deleteUser(id)
         return ResponseEntity.noContent().build()
     }

@@ -1,6 +1,5 @@
 package com.example.kotlinservertest.service
 
-
 import com.example.kotlinservertest.entity.User
 import com.example.kotlinservertest.repository.UserRepository
 import org.springframework.stereotype.Service
@@ -10,11 +9,11 @@ class UserService(private val userRepository: UserRepository) {
 
     fun getAllUsers(): List<User> = userRepository.findAll()
 
-    fun getUserById(id: Long): User? = userRepository.findById(id).orElse(null)
+    fun getUserById(id: String): User? = userRepository.findById(id).orElse(null)
 
     fun createUser(user: User): User = userRepository.save(user)
 
-    fun updateUser(id: Long, user: User): User? {
+    fun updateUser(id: String, user: User): User? {
         return if (userRepository.existsById(id)) {
             userRepository.save(user.copy(id = id))
         } else {
@@ -22,7 +21,7 @@ class UserService(private val userRepository: UserRepository) {
         }
     }
 
-    fun deleteUser(id: Long) {
+    fun deleteUser(id: String) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id)
         }
