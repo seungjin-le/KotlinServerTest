@@ -29,7 +29,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("io.springfox:springfox-boot-starter:3.0.0")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
 
     // swgger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
