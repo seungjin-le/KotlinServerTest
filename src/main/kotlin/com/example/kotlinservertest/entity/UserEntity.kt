@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class User(
     @Id
     val id: String? = null, // MongoDB ID는 String 타입, 기본값 null
-    val name: String,
-    val email: String
+    val email: String,
+    val password: String
+
 )

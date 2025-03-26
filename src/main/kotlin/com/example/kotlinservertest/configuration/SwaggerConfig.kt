@@ -23,7 +23,7 @@ class SwaggerConfig {
     fun swaggerApi(): Docket = Docket(DocumentationType.OAS_30)
         .apiInfo(swaggerInfo())
         .select()
-        .apis(RequestHandlerSelectors.basePackage("com.colabear754.swagger_example.controllers"))
+        .apis(RequestHandlerSelectors.basePackage("com.example.kotlinservertest.controller"))
         .paths(PathSelectors.any())
         .build()
         .useDefaultResponseMessages(false)
@@ -41,6 +41,8 @@ class SwaggerConfig {
             }
         }
     }
+
+
 
 }
 
