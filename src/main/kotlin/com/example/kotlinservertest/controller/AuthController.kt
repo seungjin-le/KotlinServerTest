@@ -1,5 +1,7 @@
 package com.example.kotlinservertest.controller
 
+import com.example.kotlinservertest.dto.JoinRequest
+import com.example.kotlinservertest.dto.JoinResponse
 import com.example.kotlinservertest.dto.LoginRequest
 import com.example.kotlinservertest.dto.LoginResponse
 import com.example.kotlinservertest.service.AuthService
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/auth")
-@Tag(name = "인증", description = "인증 관련 API")
+@Tag(name = "Auth", description = "인증 관련 API")
 class AuthController(private val authService: AuthService) {
 
     @Operation(
@@ -26,6 +28,7 @@ class AuthController(private val authService: AuthService) {
     @PostMapping("/login")
     fun login(@RequestBody loginRequest: LoginRequest): ResponseEntity<LoginResponse> {
         val response = authService.login(loginRequest)
+
         return ResponseEntity.ok(response)
     }
 
@@ -34,4 +37,12 @@ class AuthController(private val authService: AuthService) {
     fun getRefresh(): String {
         return ""
     }
+
+    @Operation(summary = "회원가입", description = "회원가입")
+    @GetMapping("/join")
+    fun join(@RequestBody joinRequest: JoinRequest): : ResponseEntity<JoinResponse> {
+        val JoinResponse = authService.join(joinRequest)
+        return ResponseEntity.ok(JoinResponse)
+    }
+
 }
