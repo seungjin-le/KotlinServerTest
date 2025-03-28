@@ -29,3 +29,4 @@ data class JoinResponse(
     @Schema(description = "사용자 비밀번호", example = "password123")
     val password: String
 )
+

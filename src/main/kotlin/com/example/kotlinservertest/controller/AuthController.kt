@@ -1,9 +1,9 @@
 package com.example.kotlinservertest.controller
 
 import com.example.kotlinservertest.dto.JoinRequest
-import com.example.kotlinservertest.dto.JoinResponse
 import com.example.kotlinservertest.dto.LoginRequest
 import com.example.kotlinservertest.dto.LoginResponse
+import com.example.kotlinservertest.dto.ResponseForm
 import com.example.kotlinservertest.service.AuthService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -38,11 +38,24 @@ class AuthController(private val authService: AuthService) {
         return ""
     }
 
-    @Operation(summary = "회원가입", description = "회원가입")
-    @GetMapping("/join")
-    fun join(@RequestBody joinRequest: JoinRequest): : ResponseEntity<JoinResponse> {
-        val JoinResponse = authService.join(joinRequest)
-        return ResponseEntity.ok(JoinResponse)
+    @Operation(
+        summary = "회원가입", description = "회원가입", responses = [
+            ApiResponse(responseCode = "200", description = "회원가입 성공"),
+            ApiResponse(responseCode = "400", description = "회원가입 실패"),
+            ApiResponse(responseCode = "401", description = "회원가입 실패")
+        ]
+    )
+    @PostMapping("/join")
+    fun join(@RequestBody joinRequest: JoinRequest): ResponseForm {
+        print("--- ${joinRequest.email}")
+        val joinResponse = authService.join(joinRequest)
+        return ResponseEntity.ok(
+            ResponseForm(
+                status = 200,
+                message = "회원가입 성공",
+                data = joinResponse
+            )
+        )
     }
 
 }

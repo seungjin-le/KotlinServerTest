@@ -1,7 +1,10 @@
 package com.example.kotlinservertest.service
 
+import com.example.kotlinservertest.dto.JoinRequest
+import com.example.kotlinservertest.dto.JoinResponse
 import com.example.kotlinservertest.dto.LoginRequest
 import com.example.kotlinservertest.dto.LoginResponse
+import com.example.kotlinservertest.entity.User
 import com.example.kotlinservertest.repository.UserRepository
 import com.example.kotlinservertest.utils.JwtUtil
 import io.swagger.v3.oas.annotations.Operation
@@ -20,17 +23,17 @@ class AuthService(
         val user = userRepository.findByEmail(loginRequest.email).firstOrNull()
 
         println("--- $user")
-  // ?: throw RuntimeException("사용자를 찾을 수 없습니다")
+        // ?: throw RuntimeException("사용자를 찾을 수 없습니다")
         // 비밀번호 검증 (실제로는 암호화된 비밀번호 비교 필요)
         // 예: passwordEncoder.matches(loginRequest.password, user.password)
-if(user === null){
-    throw RuntimeException("사용자를 찾을 수 없습니다")
-    return LoginResponse(
-        accessToken = "",
-        refreshToken = "",
-    )
-}
-        if (user?.password != loginRequest.password) {
+        if (user === null) {
+            throw RuntimeException("사용자를 찾을 수 없습니다")
+            return LoginResponse(
+                accessToken = "",
+                refreshToken = "",
+            )
+        }
+        if (user.password != loginRequest.password) {
             throw RuntimeException("비밀번호가 일치하지 않습니다")
         }
 
@@ -42,6 +45,28 @@ if(user === null){
             accessToken = accessToken,
             refreshToken = refreshToken,
 
+            )
+    }
+
+
+    @Operation(summary = "회원가입", description = "회원가입")
+    fun join(joinRequest: JoinRequest): JoinResponse {
+        print("--- ${joinRequest.email}")
+        if (userRepository.findByEmail(joinRequest.email).isNotEmpty()) {
+            throw RuntimeException("이메일 중복")
+
+        }
+
+
+        val user = User(
+            email = joinRequest.email,
+            password = joinRequest.password
+        )
+        userRepository.save(user)
+
+        return JoinResponse(
+            email = joinRequest.email,
+            password = joinRequest.password
         )
     }
 }

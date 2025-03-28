@@ -8,4 +8,8 @@ import org.springframework.stereotype.Repository
 interface UserRepository : MongoRepository<User, String> {
 
     fun findByEmail(email: String): List<User>
+
+
+    fun save(user: User): User
 }
+
