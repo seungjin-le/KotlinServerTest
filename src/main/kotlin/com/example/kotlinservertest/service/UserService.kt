@@ -2,10 +2,11 @@ package com.example.kotlinservertest.service
 
 import com.example.kotlinservertest.entity.User
 import com.example.kotlinservertest.repository.UserRepository
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UserService(private val userRepository: UserRepository) {
+class UserService(private val userRepository: UserRepository, private val passwordEncoder: PasswordEncoder) {
 
     fun getAllUsers(): List<User> = userRepository.findAll()
 

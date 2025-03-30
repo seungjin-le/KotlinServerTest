@@ -1,9 +1,6 @@
 package com.example.kotlinservertest.controller
 
-import com.example.kotlinservertest.dto.JoinRequest
-import com.example.kotlinservertest.dto.LoginRequest
-import com.example.kotlinservertest.dto.LoginResponse
-import com.example.kotlinservertest.dto.ResponseForm
+import com.example.kotlinservertest.dto.*
 import com.example.kotlinservertest.service.AuthService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -26,10 +23,10 @@ class AuthController(private val authService: AuthService) {
         ]
     )
     @PostMapping("/login")
-    fun login(@RequestBody loginRequest: LoginRequest): ResponseEntity<LoginResponse> {
-        val response = authService.login(loginRequest)
+    fun login(@RequestBody loginRequest: LoginRequest): ResponseEntity<ResponseForm<LoginResponse>> {
 
-        return ResponseEntity.ok(response)
+
+        return ResponseEntity.ok(authService.login(loginRequest))
     }
 
     @Operation(summary = "토큰 재발급", description = "토큰 재발급")
@@ -46,16 +43,11 @@ class AuthController(private val authService: AuthService) {
         ]
     )
     @PostMapping("/join")
-    fun join(@RequestBody joinRequest: JoinRequest): ResponseForm {
+    fun join(@RequestBody joinRequest: JoinRequest): ResponseEntity<ResponseForm<JoinResponse>> {
         print("--- ${joinRequest.email}")
-        val joinResponse = authService.join(joinRequest)
-        return ResponseEntity.ok(
-            ResponseForm(
-                status = 200,
-                message = "회원가입 성공",
-                data = joinResponse
-            )
-        )
+
+
+        return ResponseEntity.ok(authService.join(joinRequest))
     }
 
 }
