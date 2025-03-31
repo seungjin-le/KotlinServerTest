@@ -49,8 +49,7 @@ class AuthService(
             data = LoginResponse(
                 accessToken = accessToken,
                 refreshToken = refreshToken,
-
-                )
+            )
         )
     }
 

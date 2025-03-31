@@ -30,6 +30,7 @@ class SecurityConfig {
     }
 
 
+    /** 스웨거 */
     @Override
     fun addResourceHandlers(registry: ResourceHandlerRegistry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/")
