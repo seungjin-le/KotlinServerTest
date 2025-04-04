@@ -14,10 +14,12 @@ class JwtUtil(
     @Value("\${jwt.refresh.expiration}") private val refreshTokenExpiration: Long
 ) {
 
+    // Access 토큰 생성
     fun createAccessToken(userId: String): String {
         return createToken(userId, accessTokenExpiration)
     }
 
+    // Refresh 토큰 생성
     fun createRefreshToken(userId: String): String {
         return createToken(userId, refreshTokenExpiration)
     }

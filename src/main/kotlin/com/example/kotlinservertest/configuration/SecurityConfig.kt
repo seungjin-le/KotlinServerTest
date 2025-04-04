@@ -21,7 +21,7 @@ class SecurityConfig {
     fun corsConfigurationSource(): CorsConfigurationSource {
         val source = UrlBasedCorsConfigurationSource()
         val config = CorsConfiguration()
-        config.allowedOrigins = listOf("http://localhost:8000") // 프론트엔드 URL
+        config.allowedOrigins = listOf("http://localhost:8000")
         config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
         config.allowedHeaders = listOf("Authorization", "Content-Type")
         config.allowCredentials = true
