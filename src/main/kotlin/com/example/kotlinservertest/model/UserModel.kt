@@ -1,6 +1,7 @@
 package com.example.kotlinservertest.model
 
 
+import org.springframework.security.authentication.LockedException
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.crypto.password.PasswordEncoder
 import java.time.LocalDateTime
@@ -14,10 +15,13 @@ class UserDomain(
   private var loginAttempts: Int = 0,
   private var locked: Boolean = false
 ) {
-  // 비밀번호 검증 로직을 도메인에 내장
+
+
+  @Throws(AuthenticationException::class)
   fun verifyPassword(rawPassword: String, encoder: PasswordEncoder): Boolean {
     if (locked) {
-      throw AuthenticationException("계정이 잠겨 있습니다.")
+
+      throw LockedException("계정이 잠겨 있습니다.")
     }
 
     val matches = encoder.matches(rawPassword, password)
@@ -25,10 +29,10 @@ class UserDomain(
     if (!matches) {
       loginAttempts++
 
-      // 로그인 시도가 5회 이상 실패하면 계정 잠금
+      
       if (loginAttempts >= 5) {
         locked = true
-        throw AuthenticationException("로그인 시도 횟수 초과로 계정이 잠겼습니다.")
+        throw LockedException("로그인 시도 횟수 초과로 계정이 잠겼습니다.")
       }
 
       return false
