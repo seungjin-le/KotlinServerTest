@@ -8,5 +8,5 @@ class KotlinServerTestApplication
 
 fun main(args: Array<String>) {
 
-    runApplication<KotlinServerTestApplication>(*args)
+  runApplication<KotlinServerTestApplication>(*args)
 }
