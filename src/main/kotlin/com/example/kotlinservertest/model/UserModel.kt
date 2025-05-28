@@ -20,21 +20,16 @@ class UserDomain(
   @Throws(AuthenticationException::class)
   fun verifyPassword(rawPassword: String, encoder: PasswordEncoder): Boolean {
     if (locked) {
-
       throw LockedException("계정이 잠겨 있습니다.")
     }
 
     val matches = encoder.matches(rawPassword, password)
-
     if (!matches) {
       loginAttempts++
-
-      
       if (loginAttempts >= 5) {
         locked = true
         throw LockedException("로그인 시도 횟수 초과로 계정이 잠겼습니다.")
       }
-
       return false
     }
 
@@ -74,7 +69,7 @@ class UserDomain(
   }
 
   companion object {
-    // 엔티티로부터 도메인 객체 생성
+    // 엔티티 로 부터 도메인 객체 생성
     fun fromEntity(entity: com.example.kotlinservertest.entity.User): UserDomain {
       return UserDomain(
         id = entity.id,
