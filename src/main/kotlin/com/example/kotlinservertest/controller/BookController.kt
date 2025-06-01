@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.*
 @Tag(name = "Book", description = "Book API")
 class BookController {
 
-  @Operation(summary = "Get all books")
+  @Operation(summary = "책 리스트")
   @GetMapping
   fun getBooks(): ResponseEntity<List<BookResponse>> {
     return ResponseEntity.ok(emptyList())
   }
 
-  @Operation(summary = "Get a book by ID")
+  @Operation(summary = "책 검색")
   @GetMapping("/{id}")
   fun getBook(@PathVariable id: String): ResponseEntity<BookResponse> {
     return ResponseEntity.ok(BookResponse("", "", "", ""))
   }
 
-  @Operation(summary = "Create a new book")
+  @Operation(summary = "책 정보 등록")
   @PostMapping
   fun createBook(@RequestBody request: CreateBookRequest): ResponseEntity<BookResponse> {
     return ResponseEntity.ok(BookResponse("", request.title, request.author, request.description))
   }
 
-  @Operation(summary = "Update a book")
+  @Operation(summary = "책 정보 업데이트")
   @PutMapping("/{id}")
   fun updateBook(
     @PathVariable id: String,
@@ -37,7 +37,7 @@ class BookController {
     return ResponseEntity.ok(BookResponse(id, request.title, request.author, request.description))
   }
 
-  @Operation(summary = "Delete a book")
+  @Operation(summary = "책 정보 삭제")
   @DeleteMapping("/{id}")
   fun deleteBook(@PathVariable id: String): ResponseEntity<Unit> {
     return ResponseEntity.ok().build()
